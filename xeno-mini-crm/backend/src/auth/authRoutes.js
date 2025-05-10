@@ -27,6 +27,15 @@ router.get("/me", (req, res) => {
   }
 });
 
+router.get("/user", (req, res) => {
+  if (req.isAuthenticated()) {
+    res.json({ user: req.user });
+  } else {
+    res.status(401).json({ error: "Not authenticated" });
+  }
+});
+
+
 router.get("/logout", (req, res) => {
   req.logout(function (err) {
     if (err) {
